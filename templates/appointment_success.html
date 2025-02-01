@@ -1,0 +1,8 @@
+{% extends 'patient_navbar.html' %}
+{% block content %}
+<div class="container  text-center" style="margin-top: 90px;">
+    <h2>Appointment Request Submitted</h2>
+    <p>Your appointment request has been submitted successfully. Please wait for admin approval.</p>
+    <a href="{% url 'book_appointment' %}" class="btn btn-primary mt-3">Book Another Appointment</a>
+</div>
+{% endblock %}

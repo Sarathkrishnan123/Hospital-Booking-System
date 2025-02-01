@@ -1,0 +1,46 @@
+{% extends 'doctor_navbar.html' %}
+{% block content %}
+<style>
+    /* Add spacing below the navbar for the heading */
+    .heading-container {
+        margin-top: 5rem; /* Adjust for navbar height */
+    }
+
+    /* Add space between the first card and the side navbar */
+    .card-container {
+        margin-left: 15px; /* Adjust for alignment */
+    }
+
+    /* Add uniform spacing around the cards */
+    .card {
+        margin-bottom: 20px;
+        flex: 0 0 48%; /* Ensures two cards fit in one row */
+    }
+</style>
+
+<div class="container heading-container">
+    <h2 class="text-center mb-4" style="color: #008080;">Appointments</h2>
+    <div class="d-flex justify-content-between flex-wrap card-container">
+        <!-- Card for Today's Appointments -->
+        <div class="card shadow">
+            <div class="card-body text-center">
+                <h4 class="card-title">Today's Appointments</h4>
+                <p class="card-text">View all appointments scheduled for today.</p>
+                <a href="{% url 'todays_appointments' %}" class="btn" style="background-color: #008080; color: white;">View Today's Appointments</a>
+            </div>
+        </div>
+
+        <!-- Card for Upcoming Appointments -->
+        <div class="card shadow">
+            <div class="card-body text-center">
+                <h4 class="card-title">Upcoming Appointments</h4>
+                <p class="card-text">Check future appointments in advance.</p>
+                <a href="{% url 'upcoming_appointments' %}" class="btn" style="background-color: #008080; color: white;">View Upcoming Appointments</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

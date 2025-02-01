@@ -1,0 +1,138 @@
+{% extends 'admin_navbar.html' %}
+{% load static %}
+{% block content %}
+<body>
+    <!-- Container for the main content -->
+    <div class="container-fluid" style="margin-top: 80px;">
+        <div class="row justify-content-center mt-4">
+            <!-- Main Content Section -->
+            <div class="col-12 col-md-9 col-lg-8">
+                <!-- Dashboard Cards -->
+                <div class="row mt-4 justify-content-center">
+
+                    <!-- Add Doctor Card -->
+                    <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card shadow-lg border-light rounded" style="transition: transform 0.3s ease-in-out;">
+                            <div class="card-body text-center" style="background-color: #f1f1f1;">
+                                <i class="fas fa-user-md fa-3x mb-3" style="color: #007bff;"></i>
+                                <h5 class="card-title">Add Doctor</h5>
+                                <p class="card-text">Add new doctors to the system for better management.</p>
+                                <a href="{% url 'add_doctor_admin' %}" class="btn btn-primary">Add Doctor</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Patient Card -->
+                    <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card shadow-lg border-light rounded" style="transition: transform 0.3s ease-in-out;">
+                            <div class="card-body text-center" style="background-color: #f1f1f1;">
+                                <i class="fas fa-procedures fa-3x mb-3" style="color: #28a745;"></i>
+                                <h5 class="card-title">Add Patient</h5>
+                                <p class="card-text">Register new patients to keep track of their treatments.</p>
+                                <a href="{% url 'add_patient' %}" class="btn btn-success">Add Patient</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manage Appointments Card -->
+                    <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card shadow-lg border-light rounded" style="transition: transform 0.3s ease-in-out;">
+                            <div class="card-body text-center" style="background-color: #f1f1f1;">
+                                <i class="fas fa-calendar-check fa-3x mb-3" style="color: #ffc107;"></i>
+                                <h5 class="card-title">Manage Appointments</h5>
+                                <p class="card-text">View and manage upcoming patient appointments.</p>
+                                <a href="{% url 'manage_appointments' %}" class="btn btn-warning" style="color: white;">Manage Appointments</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-4 justify-content-center">
+                    <!-- Consultation Details Card -->
+                    <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card shadow-lg border-light rounded" style="transition: transform 0.3s ease-in-out;">
+                            <div class="card-body text-center" style="background-color: #f1f1f1;">
+                                <i class="fas fa-stethoscope fa-3x mb-3" style="color: #dc3545;"></i>
+                                <h5 class="card-title">Consultation Details</h5>
+                                <p class="card-text">Manage and track consultation details for doctors and patients.</p>
+                                <a href="{% url 'consultation_details' %}" class="btn btn-danger">View Consultations</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Departments Card -->
+                    <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card shadow-lg border-light rounded" style="transition: transform 0.3s ease-in-out;">
+                            <div class="card-body text-center" style="background-color: #f1f1f1;">
+                                <i class="fas fa-building fa-3x mb-3" style="color: #17a2b8;"></i>
+                                <h5 class="card-title">Add Departments</h5>
+                                <p class="card-text">Add new departments to manage various healthcare specialties.</p>
+                                <a href="{% url 'add_department' %}" class="btn btn-info">Add Department</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manage Departments Card -->
+                    <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card shadow-lg border-light rounded" style="transition: transform 0.3s ease-in-out;">
+                            <div class="card-body text-center" style="background-color: #f1f1f1;">
+                                <i class="fas fa-cogs fa-3x mb-3" style="color:black ;"></i>
+                                <h5 class="card-title">Manage Departments</h5>
+                                <p class="card-text">Edit and organize departments to streamline the healthcare system.</p>
+                                <a href="{% url 'manage_department' %}" class="btn btn-dark">Manage Departments</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4 justify-content-center">
+                    <!-- Doctors Card -->
+                    <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card shadow-lg border-light rounded" style="transition: transform 0.3s ease-in-out;">
+                            <div class="card-body text-center" style="background-color: #f1f1f1;">
+                                <i class="fas fa-user-md fa-3x mb-3" style="color: #007bff;"></i>
+                                <h5 class="card-title">Doctors</h5>
+                                <p class="card-text">View and manage doctor profiles and information.</p>
+                                <a href="{% url 'doc_table' %}" class="btn btn-primary">View Doctors</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Patients Card -->
+                    <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card shadow-lg border-light rounded" style="transition: transform 0.3s ease-in-out;">
+                            <div class="card-body text-center" style="background-color: #f1f1f1;">
+                                <i class="fas fa-procedures fa-3x mb-3" style="color: #28a745;"></i>
+                                <h5 class="card-title">Patients</h5>
+                                <p class="card-text">View and manage patient profiles and details.</p>
+                                <a href="{% url 'patient_table' %}" class="btn btn-success">View Patients</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Approve/Disapprove Card -->
+                    <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card shadow-lg border-light rounded" style="transition: transform 0.3s ease-in-out;">
+                            <div class="card-body text-center" style="background-color: #f1f1f1;">
+                                <i class="fas fa-check-circle fa-3x mb-3" style="color: #ffc107;"></i>
+                                <h5 class="card-title">Approve/Disapprove</h5>
+                                <p class="card-text">Approve or disapprove users for different roles in the system.</p>
+                                <a href="{% url 'adp' %}" class="btn btn-warning">Approve/Disapprove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
+
+
+
+
+
+
+

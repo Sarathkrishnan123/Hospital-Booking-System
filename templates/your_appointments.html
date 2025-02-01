@@ -1,0 +1,33 @@
+{% extends 'patient_navbar.html' %}
+{% load static %}
+{% block content %}
+<div class="container" style="margin-top: 80px;">
+    <h2 class="text-center mb-4">Your Appointments</h2>
+    <div class="row justify-content-center">
+        {% for appointment in appointments %}
+        <div class="col-md-6 col-lg-4 d-flex align-items-stretch">
+            <div class="card mb-4 ml-5 shadow rounded-3 border-0">
+                <div class="card-body bg-light">
+                    <h5 class="card-title text-primary mb-3">
+                        Appointment with Dr. {{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }}
+                    </h5>
+                    <p class="card-text">
+                        <strong>Department:</strong> {{ appointment.department.name }}<br>
+                        <strong>Date:</strong> {{ appointment.appointment_date }}<br>
+                        <strong>Status:</strong>
+                        {% if appointment.status == 0 %}
+                            <span class="badge bg-warning text-dark">Pending</span>
+                            {% elif appointment.status == 1 or appointment.status == 3 %}
+                            <span class="badge bg-success">Approved</span>
+                            <br><strong>OP No:</strong> {{ appointment.op_number }}
+                        {% else %}
+                            <span class="badge bg-danger">Rejected</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'patient_navbar.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Card styling */
+    .profile-card {
+        margin-top: 80px;  /* Add space from the top */
+        border-radius: 15px;  /* Round the corners of the card */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);  /* Add a strong shadow for depth */
+        overflow: hidden;
+        background: white; /* Gradient background */
+        color: black;  /* White text color */
+    }
+
+    .profile-card .card-header {
+        background-color: #007bff;  /* Make header background transparent */
+        font-size: 2rem;  /* Larger font size for the header */
+        font-weight: 600;  /* Bold font for the header */
+        text-align: center;
+        padding: 20px 0;
+        letter-spacing: 1px;
+        color: white;
+    }
+
+    .profile-card .card-body {
+        padding: 30px;  /* Add padding for content */
+        font-size: 1.1rem;
+    }
+
+    .profile-card .card-footer {
+        background-color: white;  /* Footer with matching blue background */
+        text-align: center;
+        padding: 15px;
+        border-radius: 0 0 15px 15px;  /* Rounded bottom corners */
+    }
+
+    /* Image styling */
+    .profile-card img {
+        border-radius: 50%;  /* Make the image circular */
+        max-width: 150px;  /* Set a max size for the image */
+        height: auto;
+        border: 4px solid #fff;  /* White border around the image */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Shadow around the image */
+    }
+
+    /* Text styling */
+    .profile-card h5, .profile-card p {
+        margin: 10px 0;
+        font-weight: 400;
+        line-height: 1.6;
+    }
+
+    /* Edit Button styling */
+    .profile-card .btn-primary {
+        background-color: #ff7b00;  /* Orange button color */
+        border-color: #ff7b00;
+        text-transform: uppercase;
+        padding: 10px 20px;
+        font-weight: 500;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+
+    .profile-card .btn-primary:hover {
+        background-color: #ff5100;  /* Darker orange on hover */
+        border-color: #ff5100;
+        transform: scale(1.05);  /* Slightly enlarge the button */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .profile-card {
+            margin-top: 60px;
+        }
+
+        .profile-card .card-body {
+            padding: 20px;
+        }
+
+        .profile-card img {
+            max-width: 120px;
+        }
+
+        .profile-card h5, .profile-card p {
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card profile-card">
+                <div class="card-header">
+                    Patient Profile
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            {% if patient.Image %}
+                                <img src="{{ patient.Image.url }}" alt="Doctor Image" class="img-fluid rounded-circle">
+                            {% else %}
+                                <img src="{% static 'default-avatar.png' %}" alt="Doctor Image" class="img-fluid rounded-circle">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <h5>Name: {{ patient.user.first_name }} {{ patient.user.last_name }}</h5>
+                            <p>Id: {{ patient.patient_id }}</p>
+                            <p>Email: {{ patient.user.email }}</p>
+                            <p>Username: {{ patient.user.username }}</p>
+                            <p>Gender: {{ patient.gender }}</p>
+                            <p>Address: {{ patient.Address }}</p>
+                            <p>Age: {{ patient.Age }}</p>
+                            <p>Phone: {{ patient.Phone_number }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'edit_patient_profile' %}" class="btn btn-primary">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

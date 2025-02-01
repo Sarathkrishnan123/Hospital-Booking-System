@@ -1,0 +1,86 @@
+{% extends 'admin_navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="card shadow-lg p-4 rounded">
+                    <h3 class="text-center mb-4" style="color: #004d80;">Manage Departments</h3>
+                    
+                    <!-- Department Table -->
+                    <table class="table table-bordered table-striped table-responsive-md">
+                        <thead class="text-center" style="background-color: #004d80; color: white;">
+                            <tr>
+                                <th scope="col">Department Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dept in department %}
+                            <tr>
+                                <td>{{ dept.name }}</td>
+                                <td>{{ dept.description }}</td>
+                                <td>
+                                    <!-- Delete Button (You can implement the delete functionality via a form or link) -->
+                                    <form action="{% url 'delete_department' dept.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Center the card in desktop view */
+        @media (min-width: 992px) {
+            .card {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        /* Ensure the table is responsive */
+        .table-responsive-md {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        /* Card and Table Styling */
+        .card {
+            background-color: #f8f9fa;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Make table headers bold */
+        th {
+            font-weight: bold;
+        }
+
+        /* Table Action Button Styling */
+        .btn-sm {
+            padding: 0.2rem 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        /* Making it mobile responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    </style>
+</body>
+{% endblock %}
+
+

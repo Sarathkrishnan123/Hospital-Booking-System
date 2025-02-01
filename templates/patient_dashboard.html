@@ -1,0 +1,90 @@
+{% extends 'patient_navbar.html' %}
+{% load static %}
+{% block content %}
+<body>
+    <!-- Wrapper div to center content -->
+    <div class="container-fluid" style="margin-top: 80px;">
+        <div class="row justify-content-center">
+            <!-- Dashboard Cards Section -->
+            <div class="col-12 col-md-8">
+                <!-- Welcome message with proper styling -->
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="welcome-msg text-center" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                            <h1>Welcome, {{ patient_name }}!</h1>
+                            <p>Manage your profile, book appointments, and access other functionalities here.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Cards -->
+                <div class="row mt-4">
+                    <!-- View Profile Card -->
+                    <div class="col-12 col-md-4 mb-4">
+                        <div class="card shadow-lg border-light rounded">
+                            <div class="card-body text-center">
+                                <i class="fas fa-user-circle fa-3x mb-3"></i>
+                                <h5 class="card-title">View Profile</h5>
+                                <p class="card-text">View and update your personal details.</p>
+                                <a href="{% url 'patient_profile' %}" class="btn btn-primary">Go to Profile</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Your Consultations Card -->
+                    <div class="col-12 col-md-4 mb-4">
+                        <div class="card shadow-lg border-light rounded">
+                            <div class="card-body text-center">
+                                <i class="fas fa-notes-medical fa-3x mb-3"></i>
+                                <h5 class="card-title">Your Consultations</h5>
+                                <p class="card-text">Review your past and upcoming consultations with doctors.</p>
+                                <a href="{% url 'patient_consultation_details' %}" class="btn btn-primary">View Consultations</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Your Appointments Card -->
+                    <div class="col-12 col-md-4 mb-4">
+                        <div class="card shadow-lg border-light rounded">
+                            <div class="card-body text-center">
+                                <i class="fas fa-calendar-alt fa-3x mb-3"></i>
+                                <h5 class="card-title">Your Appointments</h5>
+                                <p class="card-text">Manage and track your scheduled appointments.</p>
+                                <a href="{% url 'patient_appointments' %}" class="btn btn-primary">View Appointments</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <!-- Book Appointments Card -->
+                    <div class="col-12 col-md-6 mb-4">
+                        <div class="card shadow-lg border-light rounded">
+                            <div class="card-body text-center">
+                                <i class="fas fa-calendar-plus fa-3x mb-3"></i>
+                                <h5 class="card-title">Book Appointments</h5>
+                                <p class="card-text">Schedule a new appointment with a doctor.</p>
+                                <a href="{% url 'book_appointment' %}" class="btn btn-primary">Book Appointment</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reset Password Card -->
+                    <div class="col-12 col-md-6 mb-4">
+                        <div class="card shadow-lg border-light rounded">
+                            <div class="card-body text-center">
+                                <i class="fas fa-key fa-3x mb-3"></i>
+                                <h5 class="card-title">Reset Password</h5>
+                                <p class="card-text">Change your account password for security purposes.</p>
+                                <a href="{% url 'reset_password2' %}" class="btn btn-primary">Reset Password</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
+
+

@@ -1,0 +1,111 @@
+{% extends 'patient_navbar.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 style="margin-top: 80px;" class="text-center mb-4">Book Appointment</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <form method="POST" class="bg-light p-4 rounded shadow">
+                {% csrf_token %}
+
+                <!-- Auto-filled Patient ID and Name -->
+                <div class="form-group">
+                    <label for="patient_id">Patient ID:</label>
+                    <input type="text" id="patient_id" class="form-control" value="{{ patient.patient_id }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="patient_name">Name:</label>
+                    <input type="text" id="patient_name" class="form-control" value="{{ patient.user.first_name }} {{ patient.user.last_name }}" readonly>
+                </div>
+
+                <!-- Department Selection -->
+                <div class="form-group">
+                    <label for="department">Department:</label>
+                    <select id="department" name="department" class="form-control" onchange="this.form.submit()" required>
+                        <option value="">Select Department</option>
+                        {% for dept in departments %}
+                            <option value="{{ dept.id }}" {% if dept.id|stringformat:"s" == selected_department %}selected{% endif %}>
+                                {{ dept.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Doctor Selection based on Department -->
+                <div class="form-group">
+                    <label for="doctor">Doctor:</label>
+                    <select id="doctor" name="doctor" class="form-control" required>
+                        <option value="">Select Doctor</option>
+                        {% if doctors %}
+                            {% for doc in doctors %}
+                                <option value="{{ doc.id }}">Dr. {{ doc.user.first_name }} {{ doc.user.last_name }}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                </div>
+
+                <!-- Appointment Date -->
+                <div class="form-group">
+                    <label for="appointment_date">Appointment Date:</label>
+                    <input type="date" name="appointment_date" id="appointment_date" class="form-control" required>
+                </div>
+
+                <!-- Time Slot -->
+                <div class="form-group time-slot">
+                    <label for="time_slot">Time Slot:</label>
+                    <select name="time_slot" id="time_slot" class="form-control" required>
+                        <option value="">-- Select Time Slot --</option>
+                    </select>
+                </div>
+
+                <!-- Reason for Visit -->
+                <div class="form-group">
+                    <label for="reason_for_visit">Reason for Visit:</label>
+                    <textarea name="reason_for_visit" id="reason_for_visit" rows="3" class="form-control" required></textarea>
+                </div>
+
+                <!-- Book Appointment Button -->
+                <button type="submit" name="book_appointment" class="btn btn-primary btn-block">Book Appointment</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("appointment_date").addEventListener("change", function () {
+        const doctorId = document.getElementById("doctor").value;
+        const dateSelected = this.value;
+
+        if (doctorId && dateSelected) {
+            fetch(`/book_appointment/?doctor=${doctorId}&date=${dateSelected}`)
+                .then(response => response.json())
+                .then(data => {
+                    const timeSlotDiv = document.querySelector(".form-group.time-slot");
+                    
+                    if (data.error) {
+                        // Show error message if no slots are available
+                        timeSlotDiv.innerHTML = `<p class="text-danger">${data.error}</p>`;
+                    } else if (data.available_slots.length > 0) {
+                        // Populate time slot dropdown
+                        let dropdownHTML = `
+                            <label for="time_slot">Time Slot:</label>
+                            <select name="time_slot" id="time_slot" class="form-control" required>
+                                <option value="">-- Select Time Slot --</option>
+                        `;
+                        data.available_slots.forEach(slot => {
+                            dropdownHTML += `<option value="${slot}">${slot}</option>`;
+                        });
+                        dropdownHTML += `</select>`;
+                        timeSlotDiv.innerHTML = dropdownHTML;
+                    } else {
+                        // Handle unexpected cases (shouldn't occur under normal logic)
+                        timeSlotDiv.innerHTML = `<p class="text-danger">No slots available for today.</p>`;
+                    }
+                });
+        }
+    });
+</script>
+
+
+{% endblock %}
+

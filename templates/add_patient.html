@@ -1,0 +1,114 @@
+{% extends 'admin_navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="container mt-5">
+           
+        <!-- Department Form in a Card -->
+        <div class="card shadow-lg p-4 rounded">
+            {% if messages %}
+            <div class="mt-5">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <h3>Patient Signup</h3>
+        <form action="{% url 'admin_register_patient' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">First Name</label>
+                <input type="text" class="form-control" id="name" name="Fname" placeholder="First name" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Last Name</label>
+                <input type="text" class="form-control" id="name" name="Lname" placeholder="Last name" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="Uname" placeholder="Choose a username" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" id="age" name="age" placeholder="Enter your age" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Gender</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="other" value="other" required>
+                    <label class="form-check-label" for="other">Other</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="exampleInputPassword1" name="text" value="3">
+            </div>
+            <div class="form-group">
+                <label for="photo">Upload Your Photo</label>
+                <input type="file" class="form-control-file" id="photo" name="photo" accept="image/" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        </form>
+        
+    </div>
+
+    <style>
+        /* Styling the container to be responsive */
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+
+        /* Card styling */
+        .card {
+            background-color: #f8f9fa;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+        }
+
+        /* Form input field styling */
+        .form-control-lg {
+            padding: 10px 15px;
+            font-size: 1.1rem;
+        }
+
+        /* Add Button Styling */
+        .btn-lg {
+            padding: 12px;
+            font-size: 1.1rem;
+        }
+
+        /* Making it mobile responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    </style>
+</body>
+{% endblock %}
+

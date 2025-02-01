@@ -1,0 +1,62 @@
+{% extends 'patient_navbar.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12" style="margin-top: 20px; margin-left: 20px;">
+            <h2 class="text-center mb-4">Your Consultation Details</h2>
+            
+            {% if consultations %}
+            <div class="table-responsive">
+                <table class="table table-hover table-striped table-bordered">
+                    <thead class="text-white" style="background-color: #007bff;">
+                        <tr>
+                            <th>Doctor Name</th>
+                            <th>Department</th>
+                            <th>Op No</th>
+                            <th>Appointment Date</th>
+                            <th>Time Slot</th>
+                            <th>Reason to Visit</th>
+                            <th>Status</th>
+                            <th>Consultation Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment in consultations %}
+                        <tr>
+                            <td>{{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }}</td>
+                            <td>{{ appointment.department.name }}</td>
+                            <td>{{ appointment.op_number }}</td>
+                            <td>{{ appointment.appointment_date }}</td>
+                            <td>{{ appointment.time_slot }}</td>
+                            <td>{{ appointment.reason_for_visit }}</td>
+                            <td>
+                                {% if appointment.status == 3 %}
+                                <span class="badge bg-success">Consulted</span>
+                                {% elif appointment.status == 2 %}
+                                <span class="badge bg-danger">Rejected by Admin</span>
+                                {% else %}
+                                <span class="badge bg-warning">Not Consulted</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if appointment.status == 3 %}
+                                <a href="{% url 'view_patient_consultation_details' appointment.id %}" class="btn btn-sm btn-info text-white">View Details</a>
+                                {% else %}
+                                <span class="text-muted">No details available</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="text-muted text-center mt-4">No consultations available.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,77 @@
+{% extends 'admin_navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="container mt-5">
+           
+        <!-- Department Form in a Card -->
+        <div class="card shadow-lg p-4 rounded">
+            {% if messages %}
+            <div class="mt-5">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+            <h3 class="text-center mb-4" style="color: #004d80;">Add Department</h3>
+            <form action="{% url 'add_departmentdb' %}" method="POST" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <!-- Department Name Field -->
+                <div class="form-group">
+                    <label for="departmentName" class="font-weight-bold">Department Name</label>
+                    <input type="text" class="form-control form-control-lg" id="departmentName" name="Dname" placeholder="Enter department name" required>
+                </div>
+
+                <!-- Description Field -->
+                <div class="form-group">
+                    <label for="departmentDescription" class="font-weight-bold">Description</label>
+                    <textarea class="form-control form-control-lg" id="departmentDescription" rows="4" name="Description" placeholder="Enter department description" required></textarea>
+                </div>
+
+                <!-- Add Button -->
+                <button type="submit" style="background-color: #004d80; color: white;" class="btn  btn-block btn-lg">Add Department</button>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        /* Styling the container to be responsive */
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+
+        /* Card styling */
+        .card {
+            background-color: #f8f9fa;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+        }
+
+        /* Form input field styling */
+        .form-control-lg {
+            padding: 10px 15px;
+            font-size: 1.1rem;
+        }
+
+        /* Add Button Styling */
+        .btn-lg {
+            padding: 12px;
+            font-size: 1.1rem;
+        }
+
+        /* Making it mobile responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    </style>
+</body>
+{% endblock %}
+

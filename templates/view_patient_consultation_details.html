@@ -1,0 +1,21 @@
+{% extends 'patient_navbar.html' %}
+
+{% block content %}
+<div class="container" style="margin-top: 80px;">
+    <h2 style="text-align: center;">Consultation Details</h2>
+    
+    <div class="card" style="margin-left: 30px;">
+        <div class="card-body">
+            <h5 class="card-title">Doctor: {{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }}</h5>
+            <p><strong>Department:</strong> {{ appointment.department.name }}</p>
+            <p><strong>Appointment Date:</strong> {{ appointment.appointment_date }}</p>
+            <p><strong>Reason for Visit:</strong> {{ appointment.reason_for_visit }}</p>
+            <p><strong>Medicines Prescribed:</strong> {{ appointment.medicines }}</p>
+            <p><strong>Doctor's Description:</strong> {{ appointment.description }}</p>
+        </div>
+        <div class="card-footer text-end">
+            <a href="{% url 'patient_consultation_details' %}" class="btn btn-primary">Back to Consultations</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

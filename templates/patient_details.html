@@ -1,0 +1,58 @@
+{% extends 'doctor_navbar.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <h2 class="text-center mb-4" style="margin-top: 60px; font-weight: bold; color: #008080;">Patient Details</h2>
+
+            <!-- Patient Image -->
+            <div class="text-center mb-4">
+                <img src="{{ patient.Image.url }}" alt="Patient Image" class="img-fluid rounded-circle" style="max-width: 150px; height: auto; border: 4px solid #008080;">
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered shadow-lg">
+                    <tbody>
+                        <tr style="background-color: #f9f9f9;">
+                            <th style="background-color: #008080; color: white; width: 30%; font-weight: bold;">Name</th>
+                            <td style="font-weight: 500;">{{ patient.user.first_name }} {{ patient.user.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th style="background-color: #008080; color: white; font-weight: bold;">Patient ID</th>
+                            <td style="font-weight: 500;">{{ patient.patient_id }}</td>
+                        </tr>
+                        <tr>
+                            <th style="background-color: #008080; color: white; font-weight: bold;">Username</th>
+                            <td style="font-weight: 500;">{{ patient.user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th style="background-color: #008080; color: white; font-weight: bold;">Gender</th>
+                            <td style="font-weight: 500;">{{ patient.get_gender_display }}</td>
+                        </tr>
+                        <tr style="background-color: #f9f9f9;">
+                            <th style="background-color: #008080; color: white; font-weight: bold;">Age</th>
+                            <td style="font-weight: 500;">{{ patient.Age }}</td>
+                        </tr>
+                        <tr>
+                            <th style="background-color: #008080; color: white; font-weight: bold;">Email</th>
+                            <td style="font-weight: 500;">{{ patient.user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th style="background-color: #008080; color: white; font-weight: bold;">Address</th>
+                            <td style="font-weight: 500;">{{ patient.Address }}</td>
+                        </tr>
+                        <tr style="background-color: #f9f9f9;">
+                            <th style="background-color: #008080; color: white; font-weight: bold;">Phone Number</th>
+                            <td style="font-weight: 500;">{{ patient.Phone_number }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+

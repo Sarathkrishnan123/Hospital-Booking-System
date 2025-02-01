@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Admin Dashboard</title>
+    
+    <!-- Bootstrap and Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Sidebar styling */
+        .vertical-nav {
+            min-height: 100vh;
+            background-color: #004d80; /* Healthcare-friendly blue */
+            position: fixed;
+            top: 56px; /* Fixed navbar height */
+            left: 0; /* Sidebar on the left */
+            width: 220px;
+            padding-top: 20px;
+            z-index: 1000; /* Ensure it appears above other content */
+            transition: transform 0.3s ease;
+        }
+
+        .vertical-nav .nav-link {
+            color: #f8f9fa; /* Light color for readability */
+            padding: 15px;
+        }
+
+        .vertical-nav .nav-link:hover {
+            background-color: #0073b1; /* Slightly lighter blue for hover effect */
+            color: #f8f9fa;
+        }
+
+        /* Content area adjustment */
+        .content-area {
+            margin-left: 10px; /* Leave space for the sidebar */
+            padding: 20px;
+        }
+        .navbar-brand {
+            font-size: xx-large;
+            font-weight: bolder;
+        }
+
+        @media (max-width: 768px) {
+            
+            .vertical-nav {
+                transform: translateX(-100%); 
+                position: fixed; 
+                
+            }
+
+            .vertical-nav.show {
+                transform: translateX(0);
+            }
+
+            .content-area {
+                margin-left: 0; 
+                margin-top: 10px;
+            }
+            .navbar-nav .nav-item {
+                display: none;
+            }
+
+            .vertical-nav .nav-item.d-md-none {
+                display: block;
+            }
+                }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark  fixed-top" style="background-color:#004d80 ;">
+        <a class="navbar-brand" href="#">
+            <i class="fa-solid fa-hospital" style="color: aliceblue;"></i> Medcare Admin
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" style="color: aliceblue;" href="{% url 'logout' %}">
+                        <i class="fa-solid fa-sign-out-alt"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Vertical Sidebar -->
+    <div class="vertical-nav" id="sidebar">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin_view' %}">
+                    <i class="fas fa-tachometer-alt"></i> Admin Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'manage_appointments' %}">
+                    <i class="fas fa-calendar-check"></i> Manage Appointments
+                    {% if pending_appointments_count > 0 %}
+                        <span class="badge bg-danger">{{ pending_appointments_count }}</span>
+                    {% endif %}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'consultation_details' %}">
+                    <i class="fas fa-stethoscope"></i> Consultation Details
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'add_department' %}">
+                    <i class="fas fa-building"></i> Add Departments
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'manage_department' %}">
+                    <i class="fas fa-cogs"></i> Manage Departments
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'doc_table' %}">
+                    <i class="fas fa-user-md"></i> Doctors
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'patient_table' %}">
+                    <i class="fas fa-procedures"></i> Patients
+                </a>
+            </li>
+           <li class="nav-item">
+                    <a class="nav-link" href="{% url 'adp' %}">
+                        <i class="fas fa-check-circle"></i>
+                        Approve/Disapprove
+                        {% if unapproved_count > 0 %}
+                            <span class="badge badge-danger">{{ unapproved_count }}</span>
+                        {% endif %}
+                        
+                    </a>
+                    
+            </li>
+            <li class="nav-item d-md-none">
+                <a class="nav-link" href="{% url 'logout' %}">
+                    <i class="fa-solid fa-sign-out-alt"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content-area">
+        {% block content %}
+        <!-- Main content goes here -->
+        {% endblock %}
+    </div>
+
+    <script>
+        // Toggle sidebar visibility in mobile view
+        $('.navbar-toggler').on('click', function() {
+            $('#sidebar').toggleClass('show');
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+

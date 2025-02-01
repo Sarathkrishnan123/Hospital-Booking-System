@@ -1,0 +1,51 @@
+{% extends 'doctor_navbar.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <h2 class="text-center mt-4" style="color: #008080;">Today's Appointments</h2>
+            
+            {% if appointments %}
+            <div class="table-responsive">
+                <table class="table table-hover table-striped table-bordered mt-2">
+                    <thead class=" text-white" style="background-color: #008080;">
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>OP Number</th>
+                            <th>Time Slot</th>
+                            <th>Reason for Visit</th>
+                            <th>Action</th>
+                            <th>Personal Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment in appointments %}
+                        <tr>
+                            <td>{{ appointment.patient.user.first_name }} {{ appointment.patient.user.last_name }}</td>
+                            <td>{{ appointment.op_number }}</td>
+                            <td>{{ appointment.time_slot }}</td>
+                            <td>{{ appointment.reason_for_visit }}</td>
+                            <td>
+                                {% if appointment.status == 1 %}
+                                <a href="{% url 'attend_appointment' appointment.id %}" class="btn btn-primary btn-sm">Attend</a>
+                                {% elif appointment.status == 3 %}
+                                <span class="badge bg-success">Consulted</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'patient_details' appointment.patient.id %}" class="btn btn-info btn-sm">View Details</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="text-muted text-center mt-4">No appointments for today.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
